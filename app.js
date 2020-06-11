@@ -42,10 +42,6 @@ var preference = {
       }
     },
     payment_methods: {
-        excluded_payment_methods: [
-            { id: 'amex' },
-            { id: 'atm' }
-        ],
         excluded_payment_types: [
             { id: 'amex' },
             { id: 'atm' }
