@@ -44,25 +44,7 @@ var preference = {
     payment_methods: {
         excluded_payment_methods: [
             { id: 'amex' },
-            { id: 'atm' },
-            { id: 'redlink' },
-            { id: 'bapropagos' },
-            { id: 'rapipago' },
-            { id: 'pagofacil' },
-            { id: 'cargavirtual' },
-            { id: 'cobroexpress' },
-            { id: 'bank_transfer' }
-        ],
-        excluded_payment_types: [
-            { id: 'amex' },
-            { id: 'atm' },
-            { id: 'redlink' },
-            { id: 'bapropagos' },
-            { id: 'rapipago' },
-            { id: 'pagofacil' },
-            { id: 'cargavirtual' },
-            { id: 'cobroexpress' },
-            { id: 'bank_transfer' }
+            { id: 'atm' }
         ],
         installments: 6
     },
@@ -95,7 +77,15 @@ app.get('/detail', function (req, res) {
     preference.items[0].quantity = parseInt(req.query.unit);
     preference.items[0].picture_url = HEROKU_URL + req.query.img.slice(1);
 
-    console.log(preference.payer)
+    console.log(preference.payment_methods)
+
+    preference.payment_methods = {
+        excluded_payment_methods: [
+            { id: 'amex' },
+            { id: 'atm' }
+        ],
+        installments: 6
+    }
 
     mercadopago.preferences.create(preference).then(function (data) {
         req.query.init_point = data.body.init_point;
