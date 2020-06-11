@@ -149,7 +149,7 @@ app.post('/notifications', async (req, res, next) => {
 
     console.log(search_params)
 
-    res.status(200);
+    res.sendStatus(200);
 
 });
 
