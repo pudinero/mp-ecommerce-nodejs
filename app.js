@@ -81,8 +81,14 @@ app.get('/detail', function (req, res) {
 
     preference.payment_methods = {
         excluded_payment_methods: [
-            { id: "amex" },
-            { id: "atm" }
+            {
+                id: "amex"
+            }
+        ],
+        excluded_payment_types: [
+            {
+                id: "atm"
+            }
         ],
         installments: 6
     }
