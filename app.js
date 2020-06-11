@@ -214,25 +214,29 @@ app.post('/notifications', async (req, res, next) => {
                 break;
         
             default:
-                res.status(400).send('Bad request')
+                
                 break;
         }
     }
-    
 
-    if (req.body.topic){
+    else if (req.body.topic){
         urlapi = req.body.resource + '?access_token=' + mercadopago.configurations.getAccessToken()
 
-        fetch(urlapi, {
+        fetch("urlapi", {
             method: 'GET'
         })
-          .then(function(response) {
+        .then(function(response) {
+            //console.log(response)
             res.status(200).json(response)
-          })
-          .then(function(myJson) {
+        })
+        .then(function(myJson) {
             console.log(myJson);
             res.status(400).json(myJson)
-          })
+        })
+    }
+
+    else {
+        res.status(400).send('Bad request')
     }
 
 });
