@@ -44,10 +44,12 @@ var preference = {
     payment_methods: {
         excluded_payment_methods: [
             { id: 'amex' },
-            { id: 'atm' },
-            { id: 'redlink' },
+            { id: 'atm' }
         ],
-        excluded_payment_types: [],
+        excluded_payment_types: [
+            { id: 'amex' },
+            { id: 'atm' }
+        ],
         installments: 6
     },
     external_reference: 'cristianleguizamon37@gmail.com',
