@@ -44,11 +44,25 @@ var preference = {
     payment_methods: {
         excluded_payment_methods: [
             { id: 'amex' },
-            { id: 'atm' }
+            { id: 'atm' },
+            { id: 'redlink' },
+            { id: 'bapropagos' },
+            { id: 'rapipago' },
+            { id: 'pagofacil' },
+            { id: 'cargavirtual' },
+            { id: 'cobroexpress' },
+            { id: 'bank_transfer' }
         ],
         excluded_payment_types: [
             { id: 'amex' },
-            { id: 'atm' }
+            { id: 'atm' },
+            { id: 'redlink' },
+            { id: 'bapropagos' },
+            { id: 'rapipago' },
+            { id: 'pagofacil' },
+            { id: 'cargavirtual' },
+            { id: 'cobroexpress' },
+            { id: 'bank_transfer' }
         ],
         installments: 6
     },
