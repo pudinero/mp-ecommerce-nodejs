@@ -2,10 +2,9 @@ var express = require('express');
 var exphbs  = require('express-handlebars');
 var mercadopago = require('mercadopago');
 const port = process.env.PORT || 8080;
-const bodyParser = require('body-parser');
  
 var app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json())
 
 mercadopago.configure({
     sandbox: true,
@@ -144,9 +143,13 @@ app.get('/payment/:status', async (req, res, next) => {
 
 app.post('/notifications', async (req, res, next) => {
     
-    console.log(req.body)
+    var rawUrl = new URL(req.protocol + '://' + req.get('host') + req.originalUrl);
+    const search_params = rawUrl.searchParams;
 
-    res.status(200).send(req.body);
+    console.log({requestBody: req.body})
+    console.log(search_params)
+
+    res.status(200).json({requestBody: req.body})
 
 });
 
