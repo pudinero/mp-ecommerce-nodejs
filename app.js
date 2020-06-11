@@ -2,6 +2,7 @@ var express = require('express');
 var exphbs  = require('express-handlebars');
 var mercadopago = require('mercadopago');
 const port = process.env.PORT || 8080;
+var fetch = require('node-fetch');
  
 var app = express();
 app.use(express.json())
@@ -146,10 +147,75 @@ app.post('/notifications', async (req, res, next) => {
     var rawUrl = new URL(req.protocol + '://' + req.get('host') + req.originalUrl);
     const search_params = rawUrl.searchParams;
 
-    console.log({requestBody: req.body})
-    console.log(search_params)
+    let urlapi = ""
+    
+    switch (req.body.type) {
+        case 'invoice':
+            console.log(search_params)
 
-    res.status(200).json({requestBody: req.body})
+            urlapi = 'https://api.mercadopago.com/v1/payments/' + req.body.id + '?access_token=' + mercadopago.configurations.getAccessToken()
+
+            fetch(urlapi, {
+                method: 'GET'
+            })
+  	        .then(function(response) {
+                res.status(200).json(response)
+  	        })
+  	        .then(function(myJson) {
+                console.log(myJson);
+                res.status(400).json(myJson)
+  	        })
+
+            break;
+
+        case 'subscription':
+            urlapi = 'https://api.mercadopago.com/v1/subscriptions/' + req.body.id + '?access_token=' + mercadopago.configurations.getAccessToken()
+
+            fetch(urlapi, {
+                method: 'GET'
+            })
+  	        .then(function(response) {
+                res.status(200).json(response)
+  	        })
+  	        .then(function(myJson) {
+                console.log(myJson);
+                res.status(400).json(myJson)
+  	        })
+            break;
+
+        case 'plan':
+            urlapi = 'https://api.mercadopago.com/v1/plans/' + req.body.id + '?access_token=' + mercadopago.configurations.getAccessToken()
+
+            fetch(urlapi, {
+                method: 'GET'
+            })
+  	        .then(function(response) {
+                res.status(200).json(response)
+  	        })
+  	        .then(function(myJson) {
+                console.log(myJson);
+                res.status(400).json(myJson)
+  	        })
+            break;
+
+        case 'payment':
+            mercadopago.payment.get(req.body.id).then(function (data) {
+                res.status(200).json(req.body)
+            }).catch(function (error) {
+                console.log(error)
+                res.status(400).json(error)
+            });
+            break;
+
+        case 'test':
+            console.log(search_params)
+            res.status(200).json({requestBody: req.body})
+            break;
+    
+        default:
+            res.status(400).send('Bad request')
+            break;
+    }
 
 });
 
