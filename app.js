@@ -145,8 +145,10 @@ app.post('/notifications', async (req, res, next) => {
     let urlapi = ""
 
     console.log(search_params)
+    console.log(req.body)
     
-    switch (req.body.type) {
+    //switch (req.body.type) {
+    switch (search_params.topic) {
         case 'invoice':
             console.log(search_params)
 
