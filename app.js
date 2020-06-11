@@ -75,7 +75,6 @@ app.get('/detail', function (req, res) {
     req.query.view = "item"
 
     preference.items[0].title = req.query.title;
-    preference.items[0].description = req.query.title;
     preference.items[0].unit_price = parseFloat(req.query.price);
     preference.items[0].quantity = parseInt(req.query.unit);
     preference.items[0].picture_url = HEROKU_URL + req.query.img.slice(1);
@@ -147,7 +146,7 @@ app.post('/notifications', async (req, res, next) => {
     //console.log(search_params)
     console.log(req.body)
     
-    if (req.body.type) {
+    /*if (req.body.type) {
         switch (req.body.type) {
             //switch (search_params.topic) {
             case 'invoice':
@@ -237,7 +236,9 @@ app.post('/notifications', async (req, res, next) => {
 
     else {
         res.status(400).send('Bad request')
-    }
+    }*/
+
+    res.status(200).send("OK")
 
 });
 
