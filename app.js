@@ -13,7 +13,7 @@ mercadopago.configure({
     integrator_id: 'dev_24c65fb163bf11ea96500242ac130004' 
 });
 
-const HEROKU_URL = "https://pudinero-mp-commerce-nodejs.herokuapp.com/"
+const HEROKU_URL = "https://pudinero-mp-commerce-nodejs.herokuapp.com"
 
 var preference = {
     items: [
@@ -77,7 +77,7 @@ app.get('/detail', function (req, res) {
     preference.items[0].description = req.query.title;
     preference.items[0].unit_price = parseFloat(req.query.price);
     preference.items[0].quantity = parseInt(req.query.unit);
-    preference.items[0].picture_url = HEROKU_URL + req.query.img.slice(2);
+    preference.items[0].picture_url = HEROKU_URL + req.query.img.slice(1);
 
     console.log(preference.payer)
 
