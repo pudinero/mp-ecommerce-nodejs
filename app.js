@@ -149,6 +149,8 @@ app.post('/notifications', async (req, res, next) => {
 
     console.log(search_params)
 
+    res.status(200);
+
 });
 
 app.use(express.static('assets'));
