@@ -46,6 +46,10 @@ var preference = {
             { id: 'amex' },
             { id: 'atm' }
         ],
+        excluded_payment_types: [
+            { id: 'amex' },
+            { id: 'atm' }
+        ],
         installments: 6
     },
     external_reference: 'cristianleguizamon37@gmail.com',
