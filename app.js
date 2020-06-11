@@ -147,8 +147,8 @@ app.post('/notifications', async (req, res, next) => {
     console.log(search_params)
     console.log(req.body)
     
-    //switch (req.body.type) {
-    switch (search_params.topic) {
+    switch (req.body.type) {
+    //switch (search_params.topic) {
         case 'invoice':
             console.log(search_params)
 
@@ -215,6 +215,19 @@ app.post('/notifications', async (req, res, next) => {
         default:
             res.status(400).send('Bad request')
             break;
+    }
+
+    if (req.body.topic){
+        fetch(req.body.resource, {
+            method: 'GET'
+        })
+          .then(function(response) {
+            res.status(200).json(response)
+          })
+          .then(function(myJson) {
+            console.log(myJson);
+            res.status(400).json(myJson)
+          })
     }
 
 });
