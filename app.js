@@ -144,7 +144,7 @@ app.post('/notifications', async (req, res, next) => {
 
     let urlapi = ""
 
-    console.log(search_params)
+    //console.log(search_params)
     console.log(req.body)
     
     if (req.body.type) {
@@ -221,6 +221,7 @@ app.post('/notifications', async (req, res, next) => {
     
 
     if (req.body.topic){
+        console.log(req.body.resource + '?access_token=' + mercadopago.configurations.getAccessToken())
         fetch(req.body.resource + '?access_token=' + mercadopago.configurations.getAccessToken(), {
             method: 'GET'
         })
