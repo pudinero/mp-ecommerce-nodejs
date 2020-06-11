@@ -199,7 +199,7 @@ app.post('/notifications', async (req, res, next) => {
                 break;
     
             case 'payment':
-                mercadopago.payment.get(req.body.id).then(function (data) {
+                mercadopago.payment.get(req.body.data.id).then(function (data) {
                     console.log(data)
                     res.status(200).json(data)
                 }).catch(function (error) {
