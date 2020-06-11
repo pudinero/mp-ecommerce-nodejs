@@ -144,12 +144,9 @@ app.get('/payment/:status', async (req, res, next) => {
 
 app.post('/notifications', async (req, res, next) => {
     
-    var rawUrl = new URL(req.protocol + '://' + req.get('host') + req.originalUrl);
-    const search_params = rawUrl.searchParams;
+    console.log(req.body)
 
-    console.log(search_params)
-
-    res.sendStatus(200);
+    res.status(200).send(req.body);
 
 });
 
