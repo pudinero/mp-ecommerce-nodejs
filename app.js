@@ -147,75 +147,78 @@ app.post('/notifications', async (req, res, next) => {
     console.log(search_params)
     console.log(req.body)
     
-    switch (req.body.type) {
-    //switch (search_params.topic) {
-        case 'invoice':
-            console.log(search_params)
-
-            urlapi = 'https://api.mercadopago.com/v1/payments/' + req.body.id + '?access_token=' + mercadopago.configurations.getAccessToken()
-
-            fetch(urlapi, {
-                method: 'GET'
-            })
-  	        .then(function(response) {
-                res.status(200).json(response)
-  	        })
-  	        .then(function(myJson) {
-                console.log(myJson);
-                res.status(400).json(myJson)
-  	        })
-
-            break;
-
-        case 'subscription':
-            urlapi = 'https://api.mercadopago.com/v1/subscriptions/' + req.body.id + '?access_token=' + mercadopago.configurations.getAccessToken()
-
-            fetch(urlapi, {
-                method: 'GET'
-            })
-  	        .then(function(response) {
-                res.status(200).json(response)
-  	        })
-  	        .then(function(myJson) {
-                console.log(myJson);
-                res.status(400).json(myJson)
-  	        })
-            break;
-
-        case 'plan':
-            urlapi = 'https://api.mercadopago.com/v1/plans/' + req.body.id + '?access_token=' + mercadopago.configurations.getAccessToken()
-
-            fetch(urlapi, {
-                method: 'GET'
-            })
-  	        .then(function(response) {
-                res.status(200).json(response)
-  	        })
-  	        .then(function(myJson) {
-                console.log(myJson);
-                res.status(400).json(myJson)
-  	        })
-            break;
-
-        case 'payment':
-            mercadopago.payment.get(req.body.id).then(function (data) {
-                console.log(data)
-                res.status(200).json(data)
-            }).catch(function (error) {
-                console.log(error)
-                res.status(400).json(error)
-            });
-            break;
-
-        case 'test':
-            console.log(search_params)
-            res.status(200).json({requestBody: req.body})
-            break;
+    if (req.body.type) {
+        switch (req.body.type) {
+            //switch (search_params.topic) {
+            case 'invoice':
+                console.log(search_params)
     
-        default:
-            res.status(400).send('Bad request')
-            break;
+                urlapi = 'https://api.mercadopago.com/v1/payments/' + req.body.id + '?access_token=' + mercadopago.configurations.getAccessToken()
+    
+                fetch(urlapi, {
+                    method: 'GET'
+                })
+                  .then(function(response) {
+                    res.status(200).json(response)
+                  })
+                  .then(function(myJson) {
+                    console.log(myJson);
+                    res.status(400).json(myJson)
+                  })
+    
+                break;
+    
+            case 'subscription':
+                urlapi = 'https://api.mercadopago.com/v1/subscriptions/' + req.body.id + '?access_token=' + mercadopago.configurations.getAccessToken()
+    
+                fetch(urlapi, {
+                    method: 'GET'
+                })
+                  .then(function(response) {
+                    res.status(200).json(response)
+                  })
+                  .then(function(myJson) {
+                    console.log(myJson);
+                    res.status(400).json(myJson)
+                  })
+                break;
+    
+            case 'plan':
+                urlapi = 'https://api.mercadopago.com/v1/plans/' + req.body.id + '?access_token=' + mercadopago.configurations.getAccessToken()
+    
+                fetch(urlapi, {
+                    method: 'GET'
+                })
+                  .then(function(response) {
+                    res.status(200).json(response)
+                  })
+                  .then(function(myJson) {
+                    console.log(myJson);
+                    res.status(400).json(myJson)
+                  })
+                break;
+    
+            case 'payment':
+                mercadopago.payment.get(req.body.id).then(function (data) {
+                    console.log(data)
+                    res.status(200).json(data)
+                }).catch(function (error) {
+                    console.log(error)
+                    res.status(400).json(error)
+                });
+                break;
+    
+            case 'test':
+                console.log(search_params)
+                res.status(200).json({requestBody: req.body})
+                break;
+        
+            default:
+                res.status(400).send('Bad request')
+                break;
+        }
     }
+    
 
     if (req.body.topic){
         fetch(req.body.resource, {
