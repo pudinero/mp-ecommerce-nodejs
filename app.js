@@ -143,6 +143,8 @@ app.post('/notifications', async (req, res, next) => {
     const search_params = rawUrl.searchParams;
 
     let urlapi = ""
+
+    console.log(search_params)
     
     switch (req.body.type) {
         case 'invoice':
