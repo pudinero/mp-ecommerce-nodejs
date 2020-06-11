@@ -142,6 +142,15 @@ app.get('/payment/:status', async (req, res, next) => {
     }
 });
 
+app.get('/notifications', async (req, res, next) => {
+    
+    var rawUrl = new URL(req.protocol + '://' + req.get('host') + req.originalUrl);
+    const search_params = rawUrl.searchParams;
+
+    console.log(search_params)
+    
+});
+
 app.use(express.static('assets'));
  
 app.use('/assets', express.static(__dirname + '/assets'));
