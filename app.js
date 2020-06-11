@@ -56,7 +56,8 @@ var preference = {
         pending: HEROKU_URL + '/payment/pending',
         failure: HEROKU_URL + '/payment/failure'
     },
-    auto_return: 'approved'
+    auto_return: 'approved',
+    notification_url: HEROKU_URL + '/notifications'
 }
 
 //console.log(mercadopago)
@@ -102,12 +103,6 @@ app.get('/payment/:status', async (req, res, next) => {
 
     switch (req.params.status) {
         case 'success':
-
-            /*mercadopago.payment.get(search_params.get('collection_id')).then(function (data) {
-                res.send(data)
-            }).catch(function (error) {
-                console.log(error)
-            });*/
 
             res.send(
                 {
@@ -200,7 +195,8 @@ app.post('/notifications', async (req, res, next) => {
 
         case 'payment':
             mercadopago.payment.get(req.body.id).then(function (data) {
-                res.status(200).json(req.body)
+                console.log(data)
+                res.status(200).json(data)
             }).catch(function (error) {
                 console.log(error)
                 res.status(400).json(error)
